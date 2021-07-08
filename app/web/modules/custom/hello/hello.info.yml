@@ -1,0 +1,5 @@
+type: module
+name: Hello
+description: 'Hello test module'
+package: Formation
+core_version_requirement: ^8.8 || ^9

@@ -1,0 +1,13 @@
+<?php
+
+use Drupal\user\UserInterface;
+
+function hello_cron() {
+    \Drupal::messenger()->addMessage(t('Hello cron'));
+}
+
+function hello_user_login(UserInterface $account) {
+    \Drupal::messenger()->addMessage(t('Welcome dear %name!', [
+        '%name' => $account->getAccountName(),
+    ]));
+}
