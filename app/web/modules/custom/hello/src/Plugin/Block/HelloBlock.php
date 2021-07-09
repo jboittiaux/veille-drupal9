@@ -17,9 +17,11 @@ class HelloBlock extends BlockBase {
      */
     public function build() {
         $dateFormatter = \Drupal::service('date.formatter');
+        $account = \Drupal::service('current_user');
 
         return [
-            '#markup' => $this->t('Coucou, il est %time', [
+            '#markup' => $this->t('Coucou %name, il est %time', [
+                '%name' => $account->getDisplayName(),
                 '%time' => $dateFormatter->format(
                     \Drupal::time()->getCurrentTime(),
                     'custom',
