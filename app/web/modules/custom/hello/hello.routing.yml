@@ -15,3 +15,11 @@ hello_list:
   requirements:
     _access: 'TRUE'
 
+hello_user_statistics:
+  path: '/hello/{user}/statistics'
+  defaults:
+    _title: 'Connection statistics'
+    _controller: '\Drupal\hello\Controller\UserStatController::content'
+  requirements:
+    _access: 'TRUE'
+    user: '\d+'
