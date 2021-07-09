@@ -22,9 +22,26 @@ function hello_schema() {
                 'unsigned' => TRUE,
                 'not null' => TRUE,
             ],
+            'action' => [
+                'type' => 'int',
+                'description' => 'Action id.',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+            ],
         ],
         'primary key' => ['id'],
     ];
 
     return $schema;
+}
+
+function hello_update_9100() {
+    $schema = \Drupal::database()->schema();
+
+    $schema->addField('hello_user_statistics', 'action', [
+        'type' => 'int',
+        'description' => 'Action id.',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+    ]);
 }
