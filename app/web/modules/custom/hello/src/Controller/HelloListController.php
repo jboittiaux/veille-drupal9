@@ -6,12 +6,15 @@ use Drupal\Core\Controller\ControllerBase;
 
 class HelloListController extends ControllerBase {
 
-    public function content() {
+    public function content($nodetype = null) {
         $nodeStorage = \Drupal::entityTypeManager()->getStorage('node');
-        $nIds = $nodeStorage->getQuery()
-            ->pager(5)
-            ->execute()
-        ;
+        $query = $nodeStorage->getQuery();
+
+        if ($nodetype) {
+            $query->condition('type', $nodetype, '=');
+        }
+
+        $nIds = $query->pager(5)->execute();
         $nodes = $nodeStorage->loadMultiple($nIds);
 
         $items = [];

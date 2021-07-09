@@ -7,9 +7,11 @@ hello_example_page:
     _access: 'TRUE'
 
 hello_list:
-  path: '/hello-list'
+  path: '/hello-list/{nodetype}'
   defaults:
     _title: 'Hello List Nodes page'
     _controller: '\Drupal\hello\Controller\HelloListController::content'
+    nodetype: null
   requirements:
     _access: 'TRUE'
+
