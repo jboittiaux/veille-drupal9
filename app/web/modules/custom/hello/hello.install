@@ -1,0 +1,30 @@
+<?php
+
+function hello_schema() {
+    $schema['hello_user_statistics'] = [
+        'description' => 'Stores user connection statistics.',
+        'fields' => [
+            'id' => [
+                'type' => 'serial',
+                'description' => 'Primary Key: Unique ID.',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+            ],
+            'time' => [
+                'type' => 'int',
+                'description' => 'Timestamp of user action.',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+            ],
+            'uid' => [
+                'type' => 'int',
+                'description' => 'User id.',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+            ],
+        ],
+        'primary key' => ['id'],
+    ];
+
+    return $schema;
+}
