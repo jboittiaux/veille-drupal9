@@ -1,5 +1,6 @@
 <?php
 
+use Drupal\Core\Session\AccountInterface;
 use Drupal\user\UserInterface;
 
 function hello_cron() {
@@ -10,4 +11,20 @@ function hello_user_login(UserInterface $account) {
     \Drupal::messenger()->addMessage(t('Welcome dear %name!', [
         '%name' => $account->getAccountName(),
     ]));
+
+    // ajout du log de login
+    \Drupal::database()->insert('hello_user_statistics')->fields([
+        'time' => \Drupal::time()->getCurrentTime(),
+        'uid' => $account->id(),
+        'action' => 1,
+    ])->execute();
+}
+
+function hello_user_logout(AccountInterface $account) {
+    // ajout du log de login
+    \Drupal::database()->insert('hello_user_statistics')->fields([
+        'time' => \Drupal::time()->getCurrentTime(),
+        'uid' => $account->id(),
+        'action' => 0,
+    ])->execute();
 }
