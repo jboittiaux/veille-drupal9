@@ -31,6 +31,7 @@ class HelloBlock extends BlockBase {
             '#cache' => [
                 'keys' => ['hello:block_time'],
                 'max-age' => '10',
+                'contexts' => ['user'],
             ],
         ];
     }
