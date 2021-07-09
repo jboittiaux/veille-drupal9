@@ -9,3 +9,8 @@ hello.list:
   route_name: hello_list
   base_route: hello_example_page
   weight: 2
+
+hello_user_statistics:
+  title: "Statistics"
+  route_name: hello_user_statistics
+  base_route: entity.user.canonical
