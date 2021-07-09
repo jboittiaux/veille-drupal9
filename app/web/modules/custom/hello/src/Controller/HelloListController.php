@@ -8,16 +8,23 @@ class HelloListController extends ControllerBase {
 
     public function content() {
         $nodeStorage = \Drupal::entityTypeManager()->getStorage('node');
-        $nodes = $nodeStorage->loadMultiple();
+        $nIds = $nodeStorage->getQuery()
+            ->pager(5)
+            ->execute()
+        ;
+        $nodes = $nodeStorage->loadMultiple($nIds);
 
         $items = [];
         foreach ($nodes as $node) {
-            $items[] = $node->label();
+            $items[] = $node->toLink();
         }
 
-        return [
+        $pager = ['#type' => 'pager'];
+        $list = [
             '#theme' => 'item_list',
             '#items' => $items,
         ];
+
+        return [$list, $pager];
     }
 }
