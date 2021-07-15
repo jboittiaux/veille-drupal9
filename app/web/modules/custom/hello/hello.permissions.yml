@@ -1,2 +1,5 @@
-hello.access:
+hello access:
   title: 'Access hello'
+
+hello administer:
+  title: 'Administer hello'

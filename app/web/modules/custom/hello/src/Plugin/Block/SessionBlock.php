@@ -35,6 +35,6 @@ class SessionBlock extends BlockBase {
     }
 
     protected function blockAccess(AccountInterface $account) {
-        return AccessResult::allowedIfHasPermission($account, 'hello.access');
+        return AccessResult::allowedIfHasPermission($account, 'hello access');
     }
 }

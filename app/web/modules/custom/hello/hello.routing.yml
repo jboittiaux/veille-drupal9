@@ -21,7 +21,7 @@ hello.user_statistics:
     _title: 'Connection statistics'
     _controller: '\Drupal\hello\Controller\UserStatController::content'
   requirements:
-    _access: 'TRUE'
+    _permission: 'hello administer'
     user: '\d+'
 
 hello.form:
@@ -30,7 +30,7 @@ hello.form:
     _title: 'Hello Form'
     _form: '\Drupal\hello\Form\HelloForm'
   requirements:
-    _access: 'TRUE'
+    _permission: 'hello access'
 
 hello.settings:
   path: '/admin/config/hello'
@@ -38,4 +38,4 @@ hello.settings:
     _title: 'Hello Settings'
     _form: '\Drupal\hello\Form\HelloSettingsForm'
   requirements:
-    _access: 'TRUE'
+    _permission: 'hello administer'
