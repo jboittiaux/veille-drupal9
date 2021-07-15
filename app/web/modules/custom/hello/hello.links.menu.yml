@@ -1,0 +1,5 @@
+hello.settings:
+  title: 'Hello Settings'
+  route_name: hello.settings
+  menu_name: 'admin'
+  parent: 'system.admin_config'
