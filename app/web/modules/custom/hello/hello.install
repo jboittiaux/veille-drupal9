@@ -35,6 +35,10 @@ function hello_schema() {
     return $schema;
 }
 
+function hello_uninstall() {
+    \Drupal::state()->delete('hello.calculation.timestamp');
+}
+
 function hello_update_9100() {
     $schema = \Drupal::database()->schema();
 

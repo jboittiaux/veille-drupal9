@@ -91,16 +91,22 @@ class HelloForm extends FormBase {
         $second = $form_state->getValue('second');
         $operator = $form_state->getValue('operator');
 
+        // calcul du resultat
         $result = 0;
         $str = sprintf('$result = %s %s %s;', $first, $operator, $second);
         eval($str);
 
         $displayResult = sprintf('%s : %s', $this->t('Result'), $result);
 
+        // affichage du resultat via messenger
         \Drupal::service('messenger')->addMessage($displayResult);
 
+        // stockage du resultat pour reutilisation dans le form
         $form_state->addRebuildInfo('result', $displayResult);
 
         $form_state->setRebuild();
+
+        // stockage du timestamp dans la state api
+        \Drupal::state()->set('hello.calculation.timestamp', \Drupal::time()->getCurrentTime());
     }
 }
