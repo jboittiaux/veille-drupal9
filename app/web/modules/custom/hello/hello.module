@@ -28,3 +28,71 @@ function hello_user_logout(AccountInterface $account) {
         'action' => 0,
     ])->execute();
 }
+
+function hello_views_data() {
+    $data = [];
+    $data['hello_user_statistics'] = [];
+
+    $data['hello_user_statistics']['table'] = [];
+
+    $data['hello_user_statistics']['table']['group'] = t('Hello Statistics table');
+
+    $data['hello_user_statistics']['table']['provider'] = 'hello';
+
+    $data['hello_user_statistics']['table']['base'] = [
+      'field' => 'id',
+      'title' => t('Hello Statistics table'),
+      'help' => t('Hello Statistics help.'),
+      'weight' => -10,
+    ];
+
+    $data['hello_user_statistics']['uid'] = [
+      'title' => t('User id'),
+      'field' => [
+        'id' => 'numeric',
+      ],
+      'sort' => [
+        'id' => 'standard',
+      ],
+      'filter' => [
+        'id' => 'numeric',
+      ],
+      'relationship' => [
+        'base' => 'users_field_data',
+        'base field' => 'uid',
+        'id' => 'standard',
+        'label' => t('Hello UID -> User UID'),
+      ],
+    ];
+
+    $data['hello_user_statistics']['action'] = [
+      'title' => t('Action id'),
+      'field' => [
+        'id' => 'numeric',
+      ],
+      'sort' => [
+        'id' => 'standard',
+      ],
+      'filter' => [
+        'id' => 'numeric',
+      ],
+      'argument' => [
+        'id' => 'numeric',
+      ],
+    ];
+
+    $data['hello_user_statistics']['time'] = [
+      'title' => t('Timestamp of user action'),
+      'field' => [
+        'id' => 'date',
+      ],
+      'sort' => [
+        'id' => 'date',
+      ],
+      'filter' => [
+        'id' => 'date',
+      ],
+    ];
+
+    return $data;
+}
