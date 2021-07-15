@@ -1,5 +1,6 @@
 <?php
 
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\user\UserInterface;
 
@@ -12,21 +13,35 @@ function hello_user_login(UserInterface $account) {
         '%name' => $account->getAccountName(),
     ]));
 
-    // ajout du log de login
-    \Drupal::database()->insert('hello_user_statistics')->fields([
-        'time' => \Drupal::time()->getCurrentTime(),
-        'uid' => $account->id(),
-        'action' => 1,
-    ])->execute();
+    $hello_stat_roles = \Drupal::configFactory()
+      ->getEditable('hello.settings')
+      ->get('hello_stat_roles')
+    ;
+
+    if (array_intersect($hello_stat_roles, $account->getRoles())) {
+      // ajout du log de login
+      \Drupal::database()->insert('hello_user_statistics')->fields([
+          'time' => \Drupal::time()->getCurrentTime(),
+          'uid' => $account->id(),
+          'action' => 1,
+      ])->execute();
+    }
 }
 
 function hello_user_logout(AccountInterface $account) {
+  $hello_stat_roles = \Drupal::configFactory()
+    ->getEditable('hello.settings')
+    ->get('hello_stat_roles')
+  ;
+
+  if (array_intersect($hello_stat_roles, $account->getRoles())) {
     // ajout du log de login
     \Drupal::database()->insert('hello_user_statistics')->fields([
-        'time' => \Drupal::time()->getCurrentTime(),
-        'uid' => $account->id(),
-        'action' => 0,
+      'time' => \Drupal::time()->getCurrentTime(),
+      'uid' => $account->id(),
+      'action' => 0,
     ])->execute();
+  }
 }
 
 function hello_views_data() {
@@ -95,4 +110,52 @@ function hello_views_data() {
     ];
 
     return $data;
+}
+
+function hello_form_user_admin_settings_alter(
+  array &$form,
+  FormStateInterface $form_state,
+  string $form_id
+) {
+  $roles = \Drupal::entityTypeManager()->getStorage('user_role')->loadMultiple();
+  unset($roles['anonymous']);
+
+  $options = [];
+  foreach ($roles as $role) {
+    $options[$role->id()] = $role->label();
+  }
+
+  $hello_stat_roles = \Drupal::configFactory()
+    ->getEditable('hello.settings')
+    ->get('hello_stat_roles')
+  ;
+
+  $form = array_merge([
+    'hello_block' => [
+      '#type' => 'details',
+      '#title' => t('Roles for which to collect activity statistics'),
+      '#open' => true,
+
+      'hello_stat_roles' => [
+        '#type' => 'checkboxes',
+        '#options' => $options,
+        '#default_value' => $hello_stat_roles,
+      ],
+    ],
+  ], $form);
+
+  $form['#submit'][] = 'hello_form_user_admin_settings_submit';
+}
+
+function hello_form_user_admin_settings_submit(
+  array &$form,
+  FormStateInterface $form_state
+) {
+  $hello_stat_roles = $form_state->getValue('hello_stat_roles');
+
+  \Drupal::configFactory()
+    ->getEditable('hello.settings')
+    ->set('hello_stat_roles', $hello_stat_roles)
+    ->save()
+  ;
 }
