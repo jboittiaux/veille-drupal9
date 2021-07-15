@@ -39,3 +39,11 @@ hello.settings:
     _form: '\Drupal\hello\Form\HelloSettingsForm'
   requirements:
     _permission: 'hello administer'
+
+hello.access:
+  path: '/hello-access'
+  defaults:
+    _title: 'Hello Access'
+    _controller: '\Drupal\hello\Controller\HelloAccessController::content'
+  requirements:
+    _access_hello: '2'
