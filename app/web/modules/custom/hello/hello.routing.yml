@@ -1,4 +1,4 @@
-hello_example_page:
+hello.example_page:
   path: '/hello-example-page'
   defaults:
     _title: 'Hello example page'
@@ -6,7 +6,7 @@ hello_example_page:
   requirements:
     _access: 'TRUE'
 
-hello_list:
+hello.list:
   path: '/hello-list/{nodetype}'
   defaults:
     _title: 'Hello List Nodes page'
@@ -15,7 +15,7 @@ hello_list:
   requirements:
     _access: 'TRUE'
 
-hello_user_statistics:
+hello.user_statistics:
   path: '/hello/{user}/statistics'
   defaults:
     _title: 'Connection statistics'
@@ -23,3 +23,11 @@ hello_user_statistics:
   requirements:
     _access: 'TRUE'
     user: '\d+'
+
+hello.form:
+  path: '/hello-form'
+  defaults:
+    _title: 'Hello Form'
+    _form: '\Drupal\hello\Form\HelloForm'
+  requirements:
+    _access: 'TRUE'
