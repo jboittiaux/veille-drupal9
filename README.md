@@ -32,3 +32,37 @@ npm run start
 Une fois l'environnement lancé, l'application est accessible à l'adresse suivante : http://localhost
 
 > *Au premier démarrage, drupal va lancer sa procédure d'installation*
+
+-----
+
+## Raccourcis (nécessite npm)
+
+Lancement de l'environnement:
+```shell
+npm run start
+```
+
+Arrêt de l'environnement:
+```shell
+npm run stop
+```
+
+Accès bash:
+```shell
+npm run bash
+```
+
+Afficher les logs:
+```shell
+npm run logs
+```
+
+Exporter les configurations:
+```shell
+npm run drush-cex
+```
+
+Importer les configurations:
+```shell
+npm run drush-cim
+```
