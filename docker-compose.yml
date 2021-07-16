@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+    app:
+        build:
+            context: _docker/php
+        ports:
+            - 80:80
+        volumes:
+            - ./app:/var/www/html
+        environment: 
+            DB_NAME: drupal
+            DB_USER: drupal
+            DB_PASS: drupal
+            DB_HOST: database
+            DB_PORT: 5432
+        depends_on: 
+            - database
+
+    database:
+        image: postgres:13
+        ports:
+            - 5432:5432
+        volumes:
+            - ./_docker/database:/var/lib/postgresql/data
+        environment: 
+            POSTGRES_DB: drupal
+            POSTGRES_PASSWORD: drupal
+            POSTGRES_USER: drupal
