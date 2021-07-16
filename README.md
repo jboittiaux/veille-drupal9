@@ -10,19 +10,19 @@ Ce projet permet d'exécuter un environnement faisant tourner drupal 9.2 sur php
 ## Installation
 
 ```shell
-> git clone git@github.com:jboittiaux/veille-drupal9.git drupal9
+git clone git@github.com:jboittiaux/veille-drupal9.git drupal9
 ```
 
 ## Démarrage de l'environnement
 
 Via docker compose:
 ```shell
-> docker compose up -d
+docker compose up -d
 ```
 
 Via npm:
 ```shell
-> npm run start
+npm run start
 ```
 
 > *Au premier démarrage, drupal devrait s'installer tout seul comme un grand*
