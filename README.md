@@ -9,6 +9,7 @@ Ce projet permet d'exécuter un environnement faisant tourner drupal 9.2 sur php
 
 ## Installation
 
+Clonage du projet
 ```shell
 git clone git@github.com:jboittiaux/veille-drupal9.git drupal9
 ```
@@ -25,7 +26,7 @@ Via npm:
 npm run start
 ```
 
-> *Au premier démarrage, drupal devrait s'installer tout seul comme un grand*
+> *Au premier démarrage, drupal devrait s'installer tout seul comme un grand (ça peut-être long par contre)*
 
 ## Accès à l'application
 
