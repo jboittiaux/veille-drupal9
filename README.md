@@ -34,36 +34,60 @@ Une fois l'environnement lancé, l'application est accessible à l'adresse suiva
 
 > *Au premier démarrage, drupal va lancer sa procédure d'installation*
 
+Une fois l'installation effectuée, import de la configuration:
+
+```shell
+docker compose exec app ./vendor/bin/drush cim
+```
+
 -----
 
-## Raccourcis (nécessite npm)
+## Raccourcis
 
 Lancement de l'environnement:
 ```shell
 npm run start
+```
+```shell
+docker compose up -d
 ```
 
 Arrêt de l'environnement:
 ```shell
 npm run stop
 ```
+```shell
+docker compose down
+```
 
 Accès bash:
 ```shell
 npm run bash
+```
+```shell
+docker compose exec app bash
 ```
 
 Afficher les logs:
 ```shell
 npm run logs
 ```
+```shell
+docker compose logs -f app
+```
 
 Exporter les configurations:
 ```shell
 npm run drush-cex
 ```
+```shell
+docker compose exec app ./vendor/bin/drush cex
+```
 
 Importer les configurations:
 ```shell
 npm run drush-cim
+```
+```shell
+docker compose exec app ./vendor/bin/drush cim
 ```
